@@ -1,0 +1,30 @@
+DROP DATABASE IF EXISTS es_alberghi;
+CREATE DATABASE es_alberghi;
+USE es_alberghi;
+
+CREATE TABLE Alberghi(
+	albergoID INTEGER PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(250) NOT NULL,
+    numero_stelle INTEGER NOT NULL
+);
+
+CREATE TABLE Stanze(
+	stanzaID INTEGER PRIMARY KEY AUTO_INCREMENT,
+    numero VARCHAR(100) NOT NULL UNIQUE,
+    stato boolean NOT NULL,
+    albergoRIF INTEGER NOT NULL,
+    FOREIGN KEY (albergoRIF) REFERENCES Alberghi(albergoID) ON DELETE CASCADE
+);
+
+CREATE TABLE Prenotazioni(
+	prenotazioniID INTEGER PRIMARY KEY AUTO_INCREMENT,
+    data_inizio DATE NOT NULL,
+    data_fine DATE NOT NULL,
+    stanzaRIF INTEGER NOT NULL,
+    FOREIGN KEY (stanzaRIF) REFERENCES Stanze(stanzaID) ON DELETE CASCADE
+);
+
+
+SELECT * FROM Alberghi;
+SELECT * FROM Stanze;
+SELECT * FROM Prenotazioni;
